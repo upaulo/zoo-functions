@@ -1,0 +1,76 @@
+const { calculateEntry, countEntrants } = require('../src/calculateEntry');
+
+describe('8 - Implemente a função `calculateEntry` que calcula o valor total da entrada', () => {
+  it('ao receber um array de visitantes, retorna um objeto com a contagem', () => {
+    const entrants = [
+      { age: 5 },
+      { age: 5 },
+      { age: 5 },
+      { age: 18 },
+      { age: 18 },
+      { age: 50 },
+    ];
+
+    const actual = countEntrants(entrants);
+    const expected = { adult: 2, child: 3, senior: 1 };
+    expect(actual).toEqual(expected);
+  });
+
+  it('retorna 0 se nenhum argumento for passado', () => {
+    const actual = calculateEntry();
+    const expected = 0;
+    expect(actual).toEqual(expected);
+  });
+
+  it('retorna 0 se um objeto vazio for passado', () => {
+    const actual = calculateEntry({});
+    const expected = 0;
+    expect(actual).toEqual(expected);
+  });
+
+  it('ao receber um array de pessoas com 3 crianças, 2 pessoas adultas e 1 pessoa mais velha retorna o valor correto', () => {
+    const entrants = [
+      { age: 5 },
+      { age: 5 },
+      { age: 5 },
+      { age: 18 },
+      { age: 18 },
+      { age: 50 },
+    ];
+
+    const actual = calculateEntry(entrants);
+    const expected = 187.94;
+    expect(actual).toEqual(expected);
+  });
+
+  it('ao receber um array com 1 pessoa adulta retorna o valor correto', () => {
+    const entrants = [{ age: 18 }];
+    const actual = calculateEntry(entrants);
+    const expected = 49.99;
+    expect(actual).toEqual(expected);
+  });
+
+  it('ao receber um array com 1 pessoa mais velha retorna o valor correto', () => {
+    const entrants = [{ age: 50 }];
+    const actual = calculateEntry(entrants);
+    const expected = 24.99;
+    expect(actual).toEqual(expected);
+  });
+
+  it('ao receber um array com 1 criança retorna o valor correto', () => {
+    const entrants = [{ age: 5 }];
+    const actual = calculateEntry(entrants);
+    const expected = 20.99;
+    expect(actual).toEqual(expected);
+  });
+
+  it('ao receber um array com 1 criança e 1 pessoa mais velha retorna o valor correto', () => {
+    const entrants = [
+      { age: 5 },
+      { age: 50 },
+    ];
+    const actual = calculateEntry(entrants);
+    const expected = 45.98;
+    expect(actual).toEqual(expected);
+  });
+});
